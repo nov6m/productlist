@@ -1,0 +1,88 @@
+.product {
+  width: 1024px;
+
+  &__filter {
+    display: block;
+    margin: 0 0 16px auto;
+    width: 121px;
+    height: 35px;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    color: #B4B4B4;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+.image {
+  border-radius: 4px 4px 0 0;
+}
+.item {
+  width: 330px;
+  margin-bottom: 16px;
+  position: relative;
+  background-color: #FFFEFB;
+  border-radius: 4px;
+  box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02);
+
+  &__delete-button {
+    display: none;
+  }
+  &__delete-button > img {
+    display: block;
+    margin: auto;
+    transform: translateY(45%);
+  }
+  &__image {
+    height: 200px;
+  }
+
+  &__name {
+    font-size: 20px;
+    margin: 16px 0 16px 16px;
+  }
+
+  &__description {
+    font-size: 16px;
+    margin: 0 16px 32px;
+  }
+
+  &__price {
+    font-size: 24px;
+    margin: 0 0 24px 16px;
+  }
+
+  &__info:hover {
+    cursor: pointer;
+  }
+
+  &__info:hover + &__delete-button {
+    transition: all 0.7s;
+    background-color: #FF8484;
+  }
+
+  &__info:hover + &__delete-button,
+  &__delete-button:hover {
+    width: 32px;
+    height: 32px;
+    display: block;
+    border-radius: 10px;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    cursor: pointer;
+  }
+  &__delete-button:hover {
+    transition: all 0.7s;
+    background-color: #ca6969;
+  }
+}
+
+.item:not(:nth-child(3n)) {
+  margin-right: 16px;
+}
+
