@@ -13,6 +13,9 @@ export default createStore({
     addItem (state, payload) {
       state.productList = [...state.productList, payload]
     },
+    setItemsFromLocalStorage (state) {
+      state.productList = Object.assign(JSON.parse(localStorage.getItem('listProduct') || '[]'))
+    },
     removeItem (state, payload) {
       state.productList = state.productList.filter((_, index) => index !== payload)
     },

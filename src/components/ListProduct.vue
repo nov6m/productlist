@@ -17,7 +17,7 @@
           {{description}}
         </div>
         <div class="item__price">
-          {{new Intl.NumberFormat('ru-RU').format(price)}}
+          {{priceFormater(price)}}
         </div>
        </div>
        <div class="item__delete-button" @click="removeItem(index)">
@@ -29,8 +29,11 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed, watch } from '@vue/runtime-core'
 import { useStore } from 'vuex'
+import priceFormater from '@/services/priceFormat'
+import saveList from '@/services/saveList'
+
 export default {
   setup () {
     const store = useStore()
@@ -54,10 +57,16 @@ export default {
           break
       }
     }
+
+    watch(productList, (newValue, oldValue) => {
+      saveList(productList.value)
+    })
+
     return {
       productList,
       changeFilter,
-      removeItem
+      removeItem,
+      priceFormater
     }
   }
 }

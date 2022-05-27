@@ -40,8 +40,10 @@
 </template>
 
 <script>
-import { computed, reactive } from '@vue/runtime-core'
+import { computed, watch, reactive } from '@vue/runtime-core'
 import { useStore } from 'vuex'
+import saveList from '@/services/saveList'
+
 export default {
   setup () {
     const store = useStore()
@@ -63,6 +65,11 @@ export default {
     const addItem = function (item) {
       store.commit('addItem', Object.assign({}, item))
     }
+
+    watch(productList, (newValue, oldValue) => {
+      saveList(productList.value)
+    })
+
     return {
       productList,
       newItem,
