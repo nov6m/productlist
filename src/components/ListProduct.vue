@@ -7,9 +7,7 @@
      <option value="3">По наименованию</option>
    </select>
    <div class="product__list ">
-     <div v-for="({name, description, linkImage, price}, index) of productList" :key="index">
-       <item-product :name="name" :description="description" :linkImage="linkImage" :price="price" :index="index"></item-product>
-     </div>
+      <item-product v-for="({name, description, linkImage, price}, index) of productList" :key="index" :name="name" :description="description" :linkImage="linkImage" :price="price" :index="index"></item-product>
    </div>
  </div>
 </template>
