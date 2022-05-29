@@ -7,22 +7,8 @@
      <option value="3">По наименованию</option>
    </select>
    <div class="product__list ">
-     <div class="item" v-for="({name, description, linkImage, price}, index) of productList" :key="index">
-       <div class="item__info">
-        <div class="item__image">
-          <img :src=linkImage class="image" alt="Product photo" width="330" height="200">
-        </div>
-        <h2 class="item__name">{{name}}</h2>
-        <div class="item__description">
-          {{description}}
-        </div>
-        <div class="item__price">
-          {{priceFormater(price)}}
-        </div>
-       </div>
-       <div class="item__delete-button" @click="removeItem(index)">
-         <img src="../assets/image/icon/Bucket.png" alt="bucket">
-       </div>
+     <div v-for="({name, description, linkImage, price}, index) of productList" :key="index">
+       <item-product :name="name" :description="description" :linkImage="linkImage" :price="price" :index="index"></item-product>
      </div>
    </div>
  </div>
@@ -31,18 +17,18 @@
 <script>
 import { computed, watch } from '@vue/runtime-core'
 import { useStore } from 'vuex'
-import priceFormater from '@/services/priceFormat'
 import saveList from '@/services/saveList'
+import ItemProduct from '@/components/ItemProduct.vue'
 
 export default {
+  components: {
+    ItemProduct
+  },
   setup () {
     const store = useStore()
 
     const productList = computed(() => store.getters.PRODUCTLIST)
 
-    const removeItem = function (index) {
-      store.commit('removeItem', index)
-    }
     const changeFilter = function (event) {
       const filterType = event.target.value
       switch (filterType) {
@@ -64,9 +50,7 @@ export default {
 
     return {
       productList,
-      changeFilter,
-      removeItem,
-      priceFormater
+      changeFilter
     }
   }
 }
