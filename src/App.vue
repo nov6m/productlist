@@ -21,8 +21,8 @@ export default {
     const store = useStore()
 
     onMounted(() => {
-      if (localStorage.getItem('listProduct') !== null || localStorage.getItem('listProduct') !== '[]') {
-        store.commit('setItemsFromLocalStorage')
+      if (localStorage.getItem('listProduct') !== null) {
+        store.commit('SET_ITEMS_FROM_LOCAL_STORAGE')
       }
     })
   }

@@ -42,7 +42,6 @@
 <script>
 import { computed, watch, reactive } from '@vue/runtime-core'
 import { useStore } from 'vuex'
-import saveList from '@/services/saveList'
 
 export default {
   setup () {
@@ -54,7 +53,7 @@ export default {
       price: ''
     })
 
-    const productList = computed(() => store.getters.PRODUCTLIST)
+    const productList = computed(() => store.getters.getProductList)
     const activeAddButton = computed(() => {
       if (newItem.name === '' || newItem.linkImage === '' || newItem.price === '') {
         return true
@@ -63,11 +62,11 @@ export default {
     })
 
     const addItem = function (item) {
-      store.commit('addItem', Object.assign({}, item))
+      store.commit('ADD_ITEM', Object.assign({}, item))
     }
 
     watch(productList, (newValue, oldValue) => {
-      saveList(productList.value)
+      store.commit('SAVE_LIST_LOCAL_STORAGE')
     })
 
     return {

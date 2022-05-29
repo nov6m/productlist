@@ -28,7 +28,7 @@ export default {
     const store = useStore()
 
     const removeItem = function (index) {
-      store.commit('removeItem', index)
+      store.commit('REMOVE_ITEM', index)
     }
 
     return {

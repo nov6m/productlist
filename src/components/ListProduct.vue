@@ -21,7 +21,6 @@
 <script>
 import { computed, watch } from '@vue/runtime-core'
 import { useStore } from 'vuex'
-import saveList from '@/services/saveList'
 import ItemProduct from '@/components/ItemProduct.vue'
 
 export default {
@@ -31,25 +30,25 @@ export default {
   setup () {
     const store = useStore()
 
-    const productList = computed(() => store.getters.PRODUCTLIST)
+    const productList = computed(() => store.getters.getProductList)
 
     const changeFilter = function (event) {
       const filterType = event.target.value
       switch (filterType) {
         case '1':
-          store.commit('minPriceSort')
+          store.commit('MIN_PRICE_SORT')
           break
         case '2':
-          store.commit('maxPriceSort')
+          store.commit('MAX_PRICE_SORT')
           break
         case '3':
-          store.commit('nameSort')
+          store.commit('NAME_SORT')
           break
       }
     }
 
     watch(productList, (newValue, oldValue) => {
-      saveList(productList.value)
+      store.commit('SAVE_LIST_LOCAL_STORAGE')
     })
 
     return {

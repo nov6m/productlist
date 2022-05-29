@@ -5,21 +5,24 @@ export default createStore({
     productList: []
   },
   getters: {
-    PRODUCTLIST: (state) => {
+    getProductList: (state) => {
       return state.productList
     }
   },
   mutations: {
-    addItem (state, payload) {
+    ADD_ITEM (state, payload) {
       state.productList = [...state.productList, payload]
     },
-    setItemsFromLocalStorage (state) {
-      state.productList = Object.assign(JSON.parse(localStorage.getItem('listProduct') || '[]'))
+    SET_ITEMS_FROM_LOCAL_STORAGE (state) {
+      state.productList = [...JSON.parse(localStorage.getItem('listProduct'))]
     },
-    removeItem (state, payload) {
-      state.productList = state.productList.filter((_, index) => index !== payload)
+    SAVE_LIST_LOCAL_STORAGE (state) {
+      localStorage.setItem('listProduct', JSON.stringify(state.productList))
     },
-    minPriceSort (state) {
+    REMOVE_ITEM (state, id) {
+      state.productList = state.productList.filter((_, index) => index !== id)
+    },
+    MIN_PRICE_SORT (state) {
       state.productList = state.productList.sort(function (el1, el2) {
         if (el1.price > el2.price) {
           return 1
@@ -30,7 +33,7 @@ export default createStore({
         return 0
       })
     },
-    maxPriceSort (state) {
+    MAX_PRICE_SORT (state) {
       state.productList = state.productList.sort(function (el1, el2) {
         if (el1.price > el2.price) {
           return -1
@@ -41,7 +44,7 @@ export default createStore({
         return 0
       })
     },
-    nameSort (state) {
+    NAME_SORT (state) {
       state.productList = state.productList.sort(function (el1, el2) {
         if (el1.name > el2.name) {
           return 1
